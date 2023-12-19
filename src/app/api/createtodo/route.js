@@ -16,18 +16,18 @@ export async function POST(request) {
   console.log(reqBody);
   const title = reqBody.get("title");
   const todo = reqBody.get("todo");
-  const photo = reqBody.get("photo");
+  // const photo = reqBody.get("photo");
 
   if (title != undefined && todo != undefined) {
-    if (!photo) {
-      return NextResponse.json({ message: "no image found", success: false });
-    }
-    const byteData = await photo.arrayBuffer();
-    const buffer = Buffer.from(byteData);
-    const path = `./public/imguploads/${photo.name}`;
-    await writeFile(path, buffer);
+    // if (!photo) {
+    //   return NextResponse.json({ message: "no image found", success: false });
+    // }
+    // const byteData = await photo.arrayBuffer();
+    // const buffer = Buffer.from(byteData);
+    // const path = `./public/imguploads/${photo.name}`;
+    // await writeFile(path, buffer);
 
-    const img1 = String(photo.name);
+    // const img1 = String(photo.name);
 
     try {
       const todo1 = new Todo({
@@ -36,7 +36,7 @@ export async function POST(request) {
         created_at: new Date(),
         updated_at: new Date(),
         status: "0",
-        photo: img1,
+        photo: "dummy-image.jpg",
       });
       const savedData = todo1.save();
       return NextResponse.json({
